@@ -6,11 +6,14 @@ export const getHotels = (location = 'Москва', date = today, days = 1) => 
         const response = await fetch(`http://engine.hotellook.com/api/v2/cache.json?location=${location}&currency=rub&checkIn=${date}&checkOut=${checkOut}&limit=10&lang=ru`);
         const json = await response.json();
         console.log(json);
-
         dispatch({
             type: "GET_HOTELS",
-            payload:
-                json,
+            payload: {
+                hotels: json,
+                location,
+                checkInDate: date,
+                days: days,
+            }
 
         })
     }

@@ -1,24 +1,38 @@
-import React from 'react';
-import { CardWrapper, TitleWrapper, PriceWrapper, IconWrapper, RatingWrapper } from './styled';
+import React, { useState } from 'react';
+import { CardWrapper, TitleWrapper, PriceWrapper, IconWrapper, RatingWrapper, StyledPrice, StyledHotelName, StyledDate, IconBackground } from './styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
+import { faCoffee, faStar, faHeart, faHome } from '@fortawesome/free-solid-svg-icons';
 
-const HotelCard = () => {
+const HotelCard = ({ hotelName, price, stars, checkInDate, days }) => {
+
+    const rating = 5;
+    const hotelRating = [];
+
+    for (let i = 0; i <= rating - 1; i++) {
+        if (stars > 0) {
+            console.log(true);
+            hotelRating[i] = <FontAwesomeIcon icon={faStar} size="1x" style={{ color: "CDBC1E" }} />
+        } else {
+            console.log(false);
+            hotelRating[i] = <FontAwesomeIcon icon={faStar} size="1x" style={{ color: "black" }} />
+        }
+        stars--;
+    }
+
+
     return (
         <CardWrapper>
-            <IconWrapper><FontAwesomeIcon icon={faCoffee} size="2x" /></IconWrapper>
+            <IconWrapper><IconBackground><FontAwesomeIcon icon={faHome} size="2x" /></IconBackground></IconWrapper>
             <TitleWrapper>
-                <h2>Moscow Marriot Grand Hotel</h2>
-                <p>28 June, 2020 - 1 день</p>
+                <StyledHotelName>{hotelName}</StyledHotelName>
+                <StyledDate>{checkInDate} - {days} день</StyledDate>
                 <RatingWrapper>
-                    <FontAwesomeIcon icon={faCoffee} size="1x" />
-                    <FontAwesomeIcon icon={faCoffee} size="1x" />
-                    <FontAwesomeIcon icon={faCoffee} size="1x" />
+                    {hotelRating.map((star) => star)}
                 </RatingWrapper>
             </TitleWrapper>
             <PriceWrapper>
-                <FontAwesomeIcon icon={faCoffee} size="1x" />
-                <p>price: <h2>23 924$</h2></p>
+                <FontAwesomeIcon icon={faHeart} size="1x" style={{ color: "E55858" }} />
+                <StyledPrice>price: <b>{price}₽</b></StyledPrice>
             </PriceWrapper>
         </CardWrapper>
     )

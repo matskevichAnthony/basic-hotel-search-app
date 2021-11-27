@@ -5,8 +5,20 @@ import { getHotels } from '../../actions/Hotels';
 import BookingSearch from '../../components/BookingSearch';
 import CarouselComponent from '../../components/CarouselComponent';
 import HotelCard from '../../components/HotelCard';
+import { Scrollbars } from 'react-custom-scrollbars-2';
 
-import { HomeWrapper, ContentWrapper, LeftSideWrapper, ContentDiv, ResultsDiv, ContentResultsDiv, ExtraWrapper, HotelListWrapper } from './styled';
+import {
+    HomeWrapper,
+    ContentWrapper,
+    LeftSideWrapper,
+    ContentDiv,
+    ResultsDiv,
+    HotelListWrapper,
+    UpperInformationWrapper,
+    CityWrapper,
+    DateWrapper
+}
+    from './styled';
 
 const Hotels = () => {
 
@@ -18,6 +30,9 @@ const Hotels = () => {
     const logOutClickHandler = () => {
         dispatch(logout());
     };
+
+    const dataHotels = useSelector(state => state.hotels);
+    console.log(dataHotels);
 
     return (
         <HomeWrapper>
@@ -31,9 +46,23 @@ const Hotels = () => {
                     </ContentDiv>
                 </LeftSideWrapper>
                 <ResultsDiv>
-                    <CarouselComponent />
+                    <UpperInformationWrapper>
+                        <CityWrapper>Отели › Москва</CityWrapper>
+                        <DateWrapper>07 июля 2021</DateWrapper>
+                    </UpperInformationWrapper>
+                    <CarouselComponent images={dataHotels.images} />
                     <HotelListWrapper>
-                        <HotelCard />
+                        <Scrollbars style={{ width: "100%", height: "100%" }}>
+                            {dataHotels.hotels.map((hotel) =>
+                                <HotelCard
+                                    hotelName={hotel.hotelName}
+                                    price={hotel.priceAvg}
+                                    stars={hotel.stars}
+                                    checkInDate={dataHotels.checkInDate}
+                                    days={dataHotels.days}
+                                />
+                            )}
+                        </Scrollbars>
                     </HotelListWrapper>
                 </ResultsDiv>
             </ContentWrapper>

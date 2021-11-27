@@ -1,6 +1,6 @@
 import React from 'react';
 import Carousel from 'react-multi-carousel';
-import { Delete } from './styled';
+import { StyledImage } from './styled';
 import 'react-multi-carousel/lib/styles.css';
 
 const responsive = {
@@ -23,13 +23,11 @@ const responsive = {
     }
 };
 
-const CarouselComponent = () => {
+const CarouselComponent = ({ images }) => {
+    console.log(images);
     return (
         <Carousel responsive={responsive} arrows={false} centerMode={true} autoPlay={true} autoPlaySpeed={3500} infinite={true}>
-            <Delete />
-            <Delete />
-            <Delete />
-            <Delete />
+            {images.map((image) => <StyledImage src={require('../../assets/carouselImages/' + image).default} />)}
         </Carousel>
     )
 }

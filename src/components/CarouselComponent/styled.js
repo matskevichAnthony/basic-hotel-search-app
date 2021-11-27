@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export const Delete = styled.div`
-width: 10rem;
-height: 10rem;
-background-color: rosybrown;
-border-radius: 10px;
+export const StyledImage = styled.img`
+width: 9rem;
+height: 8rem;
+border-radius: 10%;
+background-size:cover;
 `
