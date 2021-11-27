@@ -1,5 +1,7 @@
 const initialState = {
-    textArray: [],
+    hotels: [],
+    location: undefined,
+    checkInDate: undefined,
 }
 const hotelsReducer = (state = initialState, action) => {
     switch (action.type) {

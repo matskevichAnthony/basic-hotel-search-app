@@ -42,7 +42,27 @@ export const ContentDiv = styled.div`
 export const ResultsDiv = styled.div`
     height: 100%;
     width: 100%;
+    max-width: 65%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
     background-color: white;
     border-radius: 14px;
     box-shadow: 0px 4px 33px rgba(0,0,0,0.04);
 `
+
+export const HotelListWrapper = styled.div`
+    height: 60%;
+    width: 100%;
+    overflow-y: scroll;
+    background-color: pink;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+`
+
+// export const ContentResultsDiv = styled.div`
+//     height: 80%;
+//     max-width:90%;
+//     background-color: royalblue;
+// `

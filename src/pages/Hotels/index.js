@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../actions/Auth';
 import { getHotels } from '../../actions/Hotels';
 import BookingSearch from '../../components/BookingSearch';
+import CarouselComponent from '../../components/CarouselComponent';
+import HotelCard from '../../components/HotelCard';
 
-import { HomeWrapper, ContentWrapper, LeftSideWrapper, ContentDiv, ResultsDiv } from './styled';
+import { HomeWrapper, ContentWrapper, LeftSideWrapper, ContentDiv, ResultsDiv, ContentResultsDiv, ExtraWrapper, HotelListWrapper } from './styled';
 
 const Hotels = () => {
 
@@ -12,8 +15,13 @@ const Hotels = () => {
         dispatch(getHotels())
     }, [dispatch]);
 
+    const logOutClickHandler = () => {
+        dispatch(logout());
+    };
+
     return (
         <HomeWrapper>
+            <button onClick={logOutClickHandler}>Log out</button>
             <ContentWrapper>
                 <LeftSideWrapper>
                     <ContentDiv>
@@ -22,7 +30,12 @@ const Hotels = () => {
                     <ContentDiv>
                     </ContentDiv>
                 </LeftSideWrapper>
-                <ResultsDiv></ResultsDiv>
+                <ResultsDiv>
+                    <CarouselComponent />
+                    <HotelListWrapper>
+                        <HotelCard />
+                    </HotelListWrapper>
+                </ResultsDiv>
             </ContentWrapper>
         </HomeWrapper>
     )

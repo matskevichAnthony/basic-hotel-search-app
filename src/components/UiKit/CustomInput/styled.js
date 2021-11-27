@@ -25,3 +25,7 @@ export const StyledInput = styled.input`
     width: 14rem;
     height: 2rem;
 `;
+
+export const StyledError = styled.div`
+color:red;
+`

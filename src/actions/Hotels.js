@@ -1,6 +1,9 @@
-export const getHotels = () => {
+import dayjs from 'dayjs';
+const today = dayjs().format('YYYY-MM-DD');
+export const getHotels = (location = 'Москва', date = today, days = 1) => {
     return async dispatch => {
-        const response = await fetch("http://engine.hotellook.com/api/v2/cache.json?location=Moscow&currency=rub&checkIn=2021-12-10&checkOut=2021-12-12&limit=10&lang=ru");
+        const checkOut = dayjs(date).add(days, 'day').format('YYYY-MM-DD');
+        const response = await fetch(`http://engine.hotellook.com/api/v2/cache.json?location=${location}&currency=rub&checkIn=${date}&checkOut=${checkOut}&limit=10&lang=ru`);
         const json = await response.json();
         console.log(json);
 

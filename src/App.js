@@ -1,30 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 //import pages
 import Hotels from './pages/Hotels';
 import Login from './pages/Login';
 //import components
 
-import CustomButton from './components/CustomButton';
-import CustomInput from './components/CustomInput';
+import CustomButton from './components/UiKit/CustomButton';
+import CustomInput from './components/UiKit/CustomInput';
 
 //import modules
-import { Switch, Route, useLocation } from 'react-router-dom';
+import { Switch, Route, useLocation, Redirect } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import GlobalStyle from "./components/GlobalStyle";
+import { checkLogin } from './actions/Auth';
 function App() {
-
+  const dispatch = useDispatch();
   const location = useLocation();
+  const { isAuth } = useSelector(state => state.auth);
+
+  useEffect(() => {
+    dispatch(checkLogin());
+  }, [dispatch]);
 
   return (
     <div className="App">
-      {/* <CustomButton />
-      <CustomInput /> */}
       <GlobalStyle />
       <Switch location={location} key={location.pathname}>
         <Route path="/" exact>
-          <Login />
+          {isAuth ? <Redirect to="/hotels" /> : <Login />}
         </Route>
         <Route path="/hotels" exact>
-          <Hotels />
+          {isAuth ? <Hotels /> : <Redirect to="/" />}
+        </Route>
+        <Route>
+          <Redirect to="/" />
         </Route>
       </Switch>
 
