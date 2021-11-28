@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { CardWrapper, TitleWrapper, PriceWrapper, IconWrapper, RatingWrapper, StyledPrice, StyledHotelName, StyledDate, IconBackground } from './styled';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee, faStar, faHeart, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faHeart, faHome } from '@fortawesome/free-solid-svg-icons';
 
-const HotelCard = ({ hotelName, price, stars, checkInDate, days }) => {
+const HotelCard = ({ hotelName, price, stars, checkInDate, days, isCompact }) => {
 
     const rating = 5;
     const hotelRating = [];
@@ -22,7 +22,7 @@ const HotelCard = ({ hotelName, price, stars, checkInDate, days }) => {
 
     return (
         <CardWrapper>
-            <IconWrapper><IconBackground><FontAwesomeIcon icon={faHome} size="2x" /></IconBackground></IconWrapper>
+            {!isCompact ? <IconWrapper><IconBackground><FontAwesomeIcon icon={faHome} size="2x" /></IconBackground></IconWrapper> : <></>}
             <TitleWrapper>
                 <StyledHotelName>{hotelName}</StyledHotelName>
                 <StyledDate>{checkInDate} - {days} день</StyledDate>

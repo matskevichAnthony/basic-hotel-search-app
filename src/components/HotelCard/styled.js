@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const CardWrapper = styled.div`
     max-width: 95%;
-    height: 8rem;
+    height: 6rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,7 +27,7 @@ border-radius: 50%;
 `
 
 export const TitleWrapper = styled.div`
-    min-width: 70%;
+    width: 90%;
     height: 100%;
     display: flex;
     flex-direction: column;

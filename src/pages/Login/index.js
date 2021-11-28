@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import CustomInput from '../../components/UiKit/CustomInput';
 import CustomButton from '../../components/UiKit/CustomButton';
+import { LoginWrapper, LoginWindow } from './styled';
 import { useDispatch } from 'react-redux';
 import { authenticate } from '../../actions/Auth';
 
@@ -26,23 +27,26 @@ const Login = () => {
     };
 
     return (
-        <div>
-            <CustomInput
-                title={'Логин'}
-                type={'email'}
-                errorText={"Ошибка, имейл"}
-                verificationRule={emailRegExp}
-                reference={loginRef}
-            />
-            <CustomInput
-                title={'Пароль'}
-                type={'text'}
-                errorText={"Ошибка, пароль"}
-                verificationRule={passwordRegExp}
-                reference={passwordRef}
-            />
-            <CustomButton title={'Войти'} onClick={clickHandler} />
-        </div>
+        <LoginWrapper>
+            <LoginWindow>
+                <h1>Simple Hotel Check</h1>
+                <CustomInput
+                    title={'Логин'}
+                    type={'email'}
+                    errorText={"Ошибка, имейл"}
+                    verificationRule={emailRegExp}
+                    reference={loginRef}
+                />
+                <CustomInput
+                    title={'Пароль'}
+                    type={'text'}
+                    errorText={"Ошибка, пароль"}
+                    verificationRule={passwordRegExp}
+                    reference={passwordRef}
+                />
+                <CustomButton title={'Войти'} onClick={clickHandler} />
+            </LoginWindow>
+        </LoginWrapper>
     )
 }
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BookingWrapper = styled.div`
-    max-width: 80%;
+    width: 85%;
     display: flex;
     flex-direction: column;
     justify-content: center;
