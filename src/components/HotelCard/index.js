@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { getNoun } from '../Helpers/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faHome } from '@fortawesome/free-solid-svg-icons';
 import Stars from '../UiKit/Stars';
@@ -14,11 +15,12 @@ import {
     Title,
     StyledDate,
     IconBackground,
+    HeartWrapper,
+    HouseIcon,
 } from './styled';
 
 const HotelCard = ({ hotelId, hotelName, price, stars, checkInDate, days, isCompact }) => {
     const dispatch = useDispatch();
-
     const likeClickHandler = (id) => {
         dispatch({
             type: FAVORITES_TOGGLE,
@@ -28,26 +30,30 @@ const HotelCard = ({ hotelId, hotelName, price, stars, checkInDate, days, isComp
         });
     };
 
+    let noun = getNoun(days, 'день', 'дня', 'дней');
+
     return (
-        <Wrapper>
+        <Wrapper compact={isCompact}>
             {!isCompact && (
                 <Icon>
-                    <IconBackground><FontAwesomeIcon icon={faHome} size="2x" /></IconBackground>
+                    <IconBackground><HouseIcon src={require('../../assets/Icons/House.svg').default} /></IconBackground>
                 </Icon>
             )}
-            <TitleWrapper>
-                <Title>{hotelName}</Title>
-                <StyledDate>{checkInDate}  一  {days} день</StyledDate>
-                <Stars count={stars} />
+            <TitleWrapper compact={isCompact}>
+                <Title compact={isCompact}>{hotelName}</Title>
+                <StyledDate compact={isCompact}>{checkInDate}  一  {days} {noun}</StyledDate>
+                <Stars count={stars} isCompact={isCompact} />
             </TitleWrapper>
             <PriceWrapper>
-                <FontAwesomeIcon
-                    icon={faHeart}
-                    size="1x"
-                    style={{ color: 'E55858' }}
-                    onClick={() => likeClickHandler(hotelId)}
-                />
-                <Price>price: <b>{price}₽</b></Price>
+                <HeartWrapper>
+                    <FontAwesomeIcon
+                        icon={faHeart}
+                        size="1x"
+                        style={{ color: 'E55858', cursor: 'pointer' }}
+                        onClick={() => likeClickHandler(hotelId)}
+                    />
+                </HeartWrapper>
+                <Price isCompact={isCompact}>price: <b isCompact={isCompact}>{price}₽</b></Price>
             </PriceWrapper>
         </Wrapper>
     );

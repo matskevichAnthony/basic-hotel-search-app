@@ -1,13 +1,16 @@
-import React, { useMemo, useState } from 'react';
-import { Wrapper, FavoritesTop, FilterButton, FilterButtons } from './styled';
+import React, { useMemo, useState, useRef } from 'react';
+import { Wrapper, FavoritesTop, FilterButton, FilterButtons, ArrowWrapper, Arrow } from './styled';
+import { sortButtonMode } from '../Helpers/utils';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import HotelCard from '../HotelCard';
+import CustomFilterButton from '../UiKit/CustomFilterButton';
 
 const Favorites = ({ favorites, checkInDate, days, isCompact }) => {
     const [order, setOrder] = useState({
         by: 'stars',
         direction: false,
     });
+    const [filterButtonMode, setFilterButtonMode] = useState(1);
 
     const sortedFavorites = useMemo(() => {
         return favorites.sort((hotelPrev, hotelNext) => {
@@ -18,8 +21,9 @@ const Favorites = ({ favorites, checkInDate, days, isCompact }) => {
         });
     }, [favorites, order]);
 
-    const sort = (by, direction) => {
+    const sort = (by, direction, e) => {
         setOrder({ by, direction });
+        sortButtonMode(e, filterButtonMode, setFilterButtonMode);
     };
 
     return (
@@ -28,11 +32,21 @@ const Favorites = ({ favorites, checkInDate, days, isCompact }) => {
                 <h2>Избранное</h2>
                 <FilterButtons>
                     <FilterButton
-                        onClick={() => sort('stars', !order.direction)}
-                    >Рейтинг</FilterButton>
+                        onClick={(e) => sort('stars', !order.direction, e)}
+                    >Рейтинг
+                        <ArrowWrapper>
+                            <Arrow>˄</Arrow>
+                            <Arrow>˅</Arrow>
+                        </ArrowWrapper>
+                    </FilterButton>
                     <FilterButton
-                        onClick={() => sort('priceAvg', !order.direction)}
-                    >Цена</FilterButton>
+                        onClick={(e) => sort('priceAvg', !order.direction, e)}
+                    >Цена
+                        <ArrowWrapper>
+                            <Arrow>˄</Arrow>
+                            <Arrow>˅</Arrow>
+                        </ArrowWrapper>
+                    </FilterButton>
                 </FilterButtons>
             </FavoritesTop>
             <Scrollbars style={{ width: '100%', height: '100%' }}>

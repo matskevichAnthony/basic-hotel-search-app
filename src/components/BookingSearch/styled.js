@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-    height: 100%;
+    height: 90%;
     width: 82%;
-    resize: both;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -16,14 +15,19 @@ export const Wrapper = styled.div`
 
 export const BookingForm = styled.div`
     width: 85%;
+    height: 90%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items:center;
     text-align: center;
     gap:1rem;
-    
     button{
+        font-size: 1rem;
+        height: 70%;
         width: 100%;
+    }
+    input{
+        height: 60%;
     }
 `;

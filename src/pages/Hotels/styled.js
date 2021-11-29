@@ -10,7 +10,7 @@ export const HomeWrapper = styled.div`
 `;
 
 export const ContentWrapper = styled.div`
-    width: 70%;
+    width: 65%;
     height: 85vh;
     display: flex;
     justify-content: center;

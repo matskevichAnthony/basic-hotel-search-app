@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import CustomInput from '../../components/UiKit/CustomInput';
 import CustomButton from '../../components/UiKit/CustomButton';
-import { LoginWrapper, LoginWindow } from './styled';
+import { LoginWrapper, LoginWindow, InputsWrapper } from './styled';
 import { USER_AUTHENTICATE } from '../../store/constants';
 
 const emailRegExp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
@@ -43,21 +43,23 @@ const Login = () => {
         <LoginWrapper>
             <LoginWindow>
                 <h1>Simple Hotel Check</h1>
-                <CustomInput
-                    title={'Логин'}
-                    type={'email'}
-                    errorText={'Ошибка, имейл'}
-                    verificationRule={emailRegExp}
-                    reference={loginRef}
-                />
-                <CustomInput
-                    title={'Пароль'}
-                    type={'text'}
-                    errorText={'Ошибка, пароль'}
-                    verificationRule={passwordRegExp}
-                    reference={passwordRef}
-                />
-                <CustomButton title={'Войти'} onClick={clickHandler}/>
+                <InputsWrapper>
+                    <CustomInput
+                        title={'Логин'}
+                        type={'email'}
+                        errorText={'Ошибка, email'}
+                        verificationRule={emailRegExp}
+                        reference={loginRef}
+                    />
+                    <CustomInput
+                        title={'Пароль'}
+                        type={'text'}
+                        errorText={'Ошибка, пароль'}
+                        verificationRule={passwordRegExp}
+                        reference={passwordRef}
+                    />
+                </InputsWrapper>
+                <CustomButton title={'Войти'} onClick={clickHandler} />
             </LoginWindow>
         </LoginWrapper>
     );
