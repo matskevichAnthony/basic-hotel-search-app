@@ -1,15 +1,17 @@
+import { USER_SET } from '../constants';
+
 const initialState = {
     isAuth: false,
-    login: "",
-    password: "",
+    login: '',
+    password: '',
 };
 const authReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'AUTH_USER':
+        case USER_SET:
             return { ...state, ...action.payload };
         default:
             return state;
     }
-}
+};
 
 export default authReducer;

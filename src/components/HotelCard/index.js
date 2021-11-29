@@ -1,41 +1,56 @@
 import React from 'react';
-import { CardWrapper, TitleWrapper, PriceWrapper, IconWrapper, RatingWrapper, StyledPrice, StyledHotelName, StyledDate, IconBackground } from './styled';
+import { useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faHeart, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faHome } from '@fortawesome/free-solid-svg-icons';
+import Stars from '../UiKit/Stars';
+import { FAVORITES_TOGGLE } from '../../store/constants';
 
-const HotelCard = ({ hotelName, price, stars, checkInDate, days, isCompact }) => {
+import {
+    Wrapper,
+    TitleWrapper,
+    PriceWrapper,
+    Icon,
+    Price,
+    Title,
+    StyledDate,
+    IconBackground,
+} from './styled';
 
-    const rating = 5;
-    const hotelRating = [];
+const HotelCard = ({ hotelId, hotelName, price, stars, checkInDate, days, isCompact }) => {
+    const dispatch = useDispatch();
 
-    for (let i = 0; i <= rating - 1; i++) {
-        if (stars > 0) {
-            console.log(true);
-            hotelRating[i] = <FontAwesomeIcon icon={faStar} size="1x" style={{ color: "CDBC1E" }} />
-        } else {
-            console.log(false);
-            hotelRating[i] = <FontAwesomeIcon icon={faStar} size="1x" style={{ color: "black" }} />
-        }
-        stars--;
-    }
-
+    const likeClickHandler = (id) => {
+        dispatch({
+            type: FAVORITES_TOGGLE,
+            payload: {
+                id,
+            },
+        });
+    };
 
     return (
-        <CardWrapper>
-            {!isCompact ? <IconWrapper><IconBackground><FontAwesomeIcon icon={faHome} size="2x" /></IconBackground></IconWrapper> : <></>}
+        <Wrapper>
+            {!isCompact && (
+                <Icon>
+                    <IconBackground><FontAwesomeIcon icon={faHome} size="2x" /></IconBackground>
+                </Icon>
+            )}
             <TitleWrapper>
-                <StyledHotelName>{hotelName}</StyledHotelName>
-                <StyledDate>{checkInDate} - {days} день</StyledDate>
-                <RatingWrapper>
-                    {hotelRating.map((star) => star)}
-                </RatingWrapper>
+                <Title>{hotelName}</Title>
+                <StyledDate>{checkInDate}  一  {days} день</StyledDate>
+                <Stars count={stars} />
             </TitleWrapper>
             <PriceWrapper>
-                <FontAwesomeIcon icon={faHeart} size="1x" style={{ color: "E55858" }} />
-                <StyledPrice>price: <b>{price}₽</b></StyledPrice>
+                <FontAwesomeIcon
+                    icon={faHeart}
+                    size="1x"
+                    style={{ color: 'E55858' }}
+                    onClick={() => likeClickHandler(hotelId)}
+                />
+                <Price>price: <b>{price}₽</b></Price>
             </PriceWrapper>
-        </CardWrapper>
-    )
-}
+        </Wrapper>
+    );
+};
 
 export default HotelCard;

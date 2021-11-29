@@ -1,29 +1,42 @@
 import React, { useRef } from 'react';
+import { useDispatch } from 'react-redux';
 import CustomInput from '../../components/UiKit/CustomInput';
 import CustomButton from '../../components/UiKit/CustomButton';
 import { LoginWrapper, LoginWindow } from './styled';
-import { useDispatch } from 'react-redux';
-import { authenticate } from '../../actions/Auth';
+import { USER_AUTHENTICATE } from '../../store/constants';
 
-const emailRegExp = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const emailRegExp = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 const passwordRegExp = /^[a-zA-Z0-9]{8,}$/;
 
 const Login = () => {
-
     const loginRef = useRef();
     const passwordRef = useRef();
     const dispatch = useDispatch();
 
     const clickHandler = () => {
-        const { value: loginValue, validate: validateLogin, refresh: refreshLogin } = loginRef.current;
-        const { value: passwordValue, validate: validatePassword, refresh: refreshPassword } = passwordRef.current;
+        const { value: loginValue, validate: validateLogin } = loginRef.current;
+        const { value: passwordValue, validate: validatePassword } = passwordRef.current;
+
         const isValidLogin = validateLogin();
         const isValidPassword = validatePassword();
         if (isValidLogin && isValidPassword) {
-            dispatch(authenticate(loginValue, passwordValue));
-            refreshLogin();
-            refreshPassword();
+            dispatch({
+                type: USER_AUTHENTICATE,
+                payload: {
+                    login: loginValue,
+                    password: passwordValue,
+                },
+            });
+            clearAll();
         }
+    };
+
+    const clearAll = () => {
+        const { clear: clearLogin } = loginRef.current;
+        const { clear: clearPassword } = passwordRef.current;
+
+        clearLogin();
+        clearPassword();
     };
 
     return (
@@ -33,21 +46,21 @@ const Login = () => {
                 <CustomInput
                     title={'Логин'}
                     type={'email'}
-                    errorText={"Ошибка, имейл"}
+                    errorText={'Ошибка, имейл'}
                     verificationRule={emailRegExp}
                     reference={loginRef}
                 />
                 <CustomInput
                     title={'Пароль'}
                     type={'text'}
-                    errorText={"Ошибка, пароль"}
+                    errorText={'Ошибка, пароль'}
                     verificationRule={passwordRegExp}
                     reference={passwordRef}
                 />
-                <CustomButton title={'Войти'} onClick={clickHandler} />
+                <CustomButton title={'Войти'} onClick={clickHandler}/>
             </LoginWindow>
         </LoginWrapper>
-    )
-}
+    );
+};
 
 export default Login;

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const InputWrapper = styled.div`
     max-width: 100%; 
@@ -7,8 +7,9 @@ export const InputWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 0px;
-    p{
+    padding: 0;
+    
+    p {
         font-family: Roboto;
         font-weight: bold;
         font-size: 16px;
@@ -16,8 +17,8 @@ export const InputWrapper = styled.div`
         margin-bottom: 0.3rem;
         color: #424242;
     }
+`;
 
-`
 export const StyledInput = styled.input`
     background: #FFFFFF;
     border: 1px solid #C9CACC;
@@ -28,5 +29,5 @@ export const StyledInput = styled.input`
 `;
 
 export const StyledError = styled.div`
-    color:red;
-`
+    color: red;
+`;

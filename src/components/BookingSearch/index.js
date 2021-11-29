@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-import { BookingWrapper } from './styled';
 import { useDispatch } from 'react-redux';
+import { HOTELS_GET } from '../../store/constants';
 import CustomButton from '../UiKit/CustomButton';
 import CustomInput from '../UiKit/CustomInput';
-import { getHotels } from '../../actions/Hotels';
+import { Wrapper, BookingForm } from './styled';
 
 const BookingSearch = () => {
     const dispatch = useDispatch();
@@ -15,18 +15,23 @@ const BookingSearch = () => {
         const { value: location } = locationRef.current;
         const { value: date } = dateRef.current;
         const { value: days } = daysRef.current;
-        console.log(date);
-        dispatch(getHotels(location, date, days));
+
+        dispatch({
+            type: HOTELS_GET,
+            payload: { location, date, days },
+        });
     };
 
     return (
-        <BookingWrapper>
-            <CustomInput type={"text"} title={"Локация"} reference={locationRef} />
-            <CustomInput type={"date"} title={"Дата заселения"} reference={dateRef} />
-            <CustomInput type={"number"} title={"Колличество ночей"} reference={daysRef} />
-            <CustomButton title={"Найти"} onClick={findClickHandler} />
-        </BookingWrapper>
-    )
-}
+        <Wrapper>
+            <BookingForm>
+                <CustomInput type={'text'} title={'Локация'} reference={locationRef} />
+                <CustomInput type={'date'} title={'Дата заселения'} reference={dateRef} />
+                <CustomInput type={'number'} title={'Колличество ночей'} reference={daysRef} />
+                <CustomButton title={'Найти'} onClick={findClickHandler} />
+            </BookingForm>
+        </Wrapper>
+    );
+};
 
 export default BookingSearch;

@@ -1,15 +1,11 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { InputWrapper, StyledInput, StyledError } from './styled';
-const CustomInput = ({ title, type, errorText, verificationRule, reference }) => {
 
+const CustomInput = ({ title, type, errorText, verificationRule, reference }) => {
     const [isError, setIsError] = useState(false);
     const [text, setText] = useState('');
 
-    const changeHandler = (e) => {
-        setText(e.target.value);
-    }
-
-    const refresh = useCallback(() => {
+    const clear = useCallback(() => {
         setText('');
         setIsError(false);
     }, []);
@@ -25,10 +21,13 @@ const CustomInput = ({ title, type, errorText, verificationRule, reference }) =>
     useEffect(() => {
         if (reference) {
             reference.current.validate = blurHandler;
-            reference.current.refresh = refresh;
+            reference.current.clear = clear;
         }
-    }, [reference, blurHandler, refresh]);
+    }, [reference, blurHandler, clear]);
 
+    const changeHandler = (e) => {
+        setText(e.target.value);
+    };
 
     return (
         <InputWrapper isError={isError}>
@@ -43,8 +42,7 @@ const CustomInput = ({ title, type, errorText, verificationRule, reference }) =>
             />
             {isError && <StyledError>{errorText}</StyledError>}
         </InputWrapper>
-    )
-
-}
+    );
+};
 
 export default CustomInput;
