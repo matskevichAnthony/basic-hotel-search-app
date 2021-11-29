@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { getNoun } from '../Helpers/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faHome } from '@fortawesome/free-solid-svg-icons';
+import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import Stars from '../UiKit/Stars';
 import { FAVORITES_TOGGLE } from '../../store/constants';
 

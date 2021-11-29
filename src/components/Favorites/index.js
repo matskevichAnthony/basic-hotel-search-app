@@ -1,9 +1,8 @@
-import React, { useMemo, useState, useRef } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Wrapper, FavoritesTop, FilterButton, FilterButtons, ArrowWrapper, Arrow } from './styled';
 import { sortButtonMode } from '../Helpers/utils';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import HotelCard from '../HotelCard';
-import CustomFilterButton from '../UiKit/CustomFilterButton';
 
 const Favorites = ({ favorites, checkInDate, days, isCompact }) => {
     const [order, setOrder] = useState({

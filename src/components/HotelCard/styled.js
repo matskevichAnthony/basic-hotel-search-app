@@ -90,17 +90,17 @@ export const Price = styled.div`
 `;
 
 export const HeartWrapper = styled.div`
-width: 5rem;
-display: flex;
-justify-content: center;
-align-items: center;
+    width: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-svg{
-    margin-left: 2rem;
-}
-`
+    svg{
+        margin-left: 2rem;
+    }
+`;
 
 export const HouseIcon = styled.img`
-width: 2rem;
-height: 2rem;
-`
+    width: 2rem;
+    height: 2rem;
+`;
